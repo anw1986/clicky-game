@@ -1,4 +1,5 @@
 .card {
+  display: inline-block;
   background: #fff;
   border-radius: 2px;
   height: 325px;
@@ -10,13 +11,17 @@
 }
 
 .card > .img-container {
-  height: 60%;
+  height: 100%;
   overflow: hidden;
   text-align: center;
   background:#6CADDC;
 }
 .card > .img-container > img {
-  width: 60%
+  width: 60%;
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+ 
 }
 
 .card > .content {

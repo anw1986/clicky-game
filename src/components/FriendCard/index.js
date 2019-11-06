@@ -15,4 +15,3 @@ function FriendCard(props) {
 
 export default FriendCard;
 
-
