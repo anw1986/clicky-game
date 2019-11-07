@@ -1,11 +1,12 @@
 import React from 'react'
+import "./style.css";
 
 function Navbar(props) {
     return (
       
-        <nav className="navbar navbar-light shadow-lg sticky-top d-flex justify-content-around">
+        <nav className="navbar shadow-lg sticky-top d-flex justify-content-around">
             <a href="/">
-                <span className="navbar-brand mb-0 h1">Clicky Game</span>
+                <span className="navbar-brand mb-0 ">Clicky Game</span>
             </a>
             <h2>{props.msg}</h2>
             <ul className=" nav list-group list-group-horizontal ">

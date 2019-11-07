@@ -17,7 +17,9 @@ class App extends Component {
     score:0,
     highScore:0,
     selectCardId:0,
-    msg:['Click an image to begin!','You guessed correctly!','You guessed incorrectly!']
+    msg:['Click an image to begin!','You guessed correctly!','You guessed incorrectly!'],
+    showMsg:false,
+    correctGuess:false
   };
 
   shuffleFriends=(array)=> {
@@ -42,10 +44,16 @@ class App extends Component {
     let shuffledFriends = this.shuffleFriends(friends);
     let highScoreChange=this.state.highScore
     let scoreChange=this.state.score
+    let updateMsg=this.state.msg
+    let correctAnswer=this.state.correctGuess
+
     if(selectId !== previousCardSelect){
-        if(scoreChange===highScoreChange){
+      updateMsg=true  
+      correctAnswer=true
+      if(scoreChange===highScoreChange){
           scoreChange++
           highScoreChange++
+          
         }else{
           scoreChange++
         }
@@ -53,13 +61,19 @@ class App extends Component {
         friends:shuffledFriends,
         selectCardId:selectId,
         score:scoreChange,
-        highScore:highScoreChange})
+        highScore:highScoreChange, 
+        showMsg:updateMsg, 
+        correctGuess:correctAnswer})
     }else{
+      updateMsg=true
+      correctAnswer=false
       this.setState({
         friends:shuffledFriends,
         selectCardId:selectId,
         score:0,
-        highScore:highScoreChange})
+        highScore:highScoreChange, 
+        showMsg:updateMsg, 
+        correctGuess:correctAnswer})
     }
   };
 
@@ -70,9 +84,19 @@ class App extends Component {
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
+    let displayMsg
+    if(this.state.showMsg===false){
+      displayMsg=this.state.msg[0]
+    } else if(this.state.correctGuess){
+      displayMsg=this.state.msg[1]
+    }else{
+      displayMsg=this.state.msg[2]
+    }
+
+
     return (
       <div>
-        <Navbar score={this.state.score} highScore={this.state.highScore} msg={this.state.msg[0]}></Navbar>
+        <Navbar score={this.state.score} highScore={this.state.highScore} msg={displayMsg}></Navbar>
         <Jumbotron></Jumbotron>
         <div className="container">
           {this.state.friends.map(friend => (
@@ -86,7 +110,7 @@ class App extends Component {
             ))}
 
         </div>
-        </div>
+      </div>
      
     );
   }
